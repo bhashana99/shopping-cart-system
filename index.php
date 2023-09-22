@@ -31,7 +31,7 @@
         <a class="nav-link" href="./checkout.php">Checkout</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> <span class="badge badge-danger" id="cart-item">1</span></a>
+        <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> <span class="badge badge-danger" id="cart-item"></span></a>
       </li>
     </ul>
   </div>
@@ -103,10 +103,25 @@
                 data:{pid:pid,pname:pname,pprice:pprice,pimage:pimage,pcode:pcode},
                 success:function(response){
                     $("#message").html(response);
+                    load_cart_item_number();
                 }
             });
 
         });
+
+        load_cart_item_number();
+        //show cart number ajax request
+        function load_cart_item_number(){
+            $.ajax({
+                url:'action.php',
+                method: 'get',
+                data: {cartItem:"cart_item"},
+                success:function(response){
+                    $("#cart-item").html(response);
+                }
+            });
+        }
+
     });
 
 
