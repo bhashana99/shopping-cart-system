@@ -59,7 +59,7 @@
                         <form action="" class="form-submit">
                             <input type="hidden" class="pid" value="<?= $row['id'] ?>" >
                             <input type="hidden" class="pname" value="<?= $row['product_name'] ?>" >
-                            <input type="hidden" class="pprice" value="<?= $row['product_name'] ?>" >
+                            <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>" >
                             <input type="hidden" class="pimage" value="<?= $row['product_image'] ?>" >
                             <input type="hidden" class="pcode" value="<?= $row['product_code'] ?>" >
                             <button type="button" class="btn btn-info btn-block addItemBtn"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to cart</button>
@@ -76,7 +76,7 @@
 
 
 <!-- jQuery library -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Popper JS -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -86,6 +86,7 @@
 
 <script>
     $(document).ready(function(){
+        //sent data for cart Ajax request
         $(".addItemBtn").click(function(e){
             e.preventDefault();
 
@@ -101,7 +102,7 @@
                 method:'post',
                 data:{pid:pid,pname:pname,pprice:pprice,pimage:pimage,pcode:pcode},
                 success:function(response){
-                    $("message").html(response);
+                    $("#message").html(response);
                 }
             });
 
