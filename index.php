@@ -50,6 +50,9 @@
             <div class="card-deck">
                 <div class="card p-2 border-secondary mb-2">
                     <img src="<?= $row['product_image'] ?>" alt="product image" class="card-img-top" height="250">
+                    <div class="card-body p-1">
+                        <h4 class="card-title text-center text-info"><?= $row['product_name'] ?></h4>
+                    </div>
                 </div>
             </div>
         </div>
