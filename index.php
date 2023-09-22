@@ -38,7 +38,7 @@
 </nav>
 
 <div class="container">
-    <div class="row">
+    <div class="row mt-2 pb-3">
         <?php  
             include 'config.php';
             $stmt = $conn->prepare("SELECT * FROM product");
