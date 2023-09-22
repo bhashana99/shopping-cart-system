@@ -37,6 +37,18 @@
   </div>
 </nav>
 
+<div class="container">
+    <div class="row">
+        <?php  
+            include 'config.php';
+            $stmt = $conn->prepare("SELECT * FROM product");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while($row = $result->fetch_assoc());
+        ?>
+
+    </div>
+</div>
 
 
 <!-- jQuery library -->
