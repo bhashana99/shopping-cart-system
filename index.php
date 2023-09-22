@@ -54,6 +54,9 @@
                         <h4 class="card-title text-center text-info"><?= $row['product_name'] ?></h4>
                         <h5 class="card-text text-center text-danger"><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['product_price'],2) ?>/-</h5>
                     </div>
+                    <div class="card-footer p-1">
+                        <a href="action.php?id=<?= $row['id'] ?>" class="btn btn-info btn-block"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to cart</a>
+                    </div>
                 </div>
             </div>
         </div>
