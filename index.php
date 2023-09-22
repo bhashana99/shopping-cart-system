@@ -46,7 +46,7 @@
             $result = $stmt->get_result();
             while($row = $result->fetch_assoc()):
         ?>
-        <div class="col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-2">
             <div class="card-deck">
                 <div class="card p-2 border-secondary mb-2">
                     <img src="<?= $row['product_image'] ?>" alt="product image" class="card-img-top" height="250">
