@@ -55,7 +55,15 @@
                         <h5 class="card-text text-center text-danger"><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['product_price'],2) ?>/-</h5>
                     </div>
                     <div class="card-footer p-1">
-                        <a href="action.php?id=<?= $row['id'] ?>" class="btn btn-info btn-block"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to cart</a>
+                        <form action="" class="form-submit">
+                            <input type="hidden" class="pid" value="<?= $row['id'] ?>" >
+                            <input type="hidden" class="pname" value="<?= $row['product_name'] ?>" >
+                            <input type="hidden" class="pprice" value="<?= $row['product_name'] ?>" >
+                            <input type="hidden" class="pimage" value="<?= $row['product_image'] ?>" >
+                            <input type="hidden" class="pcode" value="<?= $row['product_code'] ?>" >
+                            <button type="button" class="btn btn-info btn-block addItemBtn"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to cart</button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>
