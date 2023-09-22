@@ -33,7 +33,15 @@ if(isset($_POST['pid'])){
     }
 }
 
+//Handle cart number ajax request
+if(isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item'){
+    $stmt = $conn->prepare("SELECT * FROM cart");
+    $stmt->execute();
+    $stmt->store_result();
+    $rows = $stmt->num_rows;
 
+    echo $rows;
+}
 
 
 ?>
