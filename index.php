@@ -44,8 +44,16 @@
             $stmt = $conn->prepare("SELECT * FROM product");
             $stmt->execute();
             $result = $stmt->get_result();
-            while($row = $result->fetch_assoc());
+            while($row = $result->fetch_assoc()):
         ?>
+        <div class="col-lg-3">
+            <div class="card-deck">
+                <div class="card p-2 border-secondary mb-2">
+                    <img src="<?= $row['product_image'] ?>" alt="product image" class="card-img-top" height="250">
+                </div>
+            </div>
+        </div>
+        <?php endwhile; ?>
 
     </div>
 </div>
