@@ -86,10 +86,12 @@ session_start();
 
                         <tr>
                             <td><?= $row['id'] ?></td>
+                            <input type="hidden" class="pid" value="<?= $row['id'] ?>">
                             <td><img src="<?= $row['product_image'] ?>" alt="" width="50"></td>
                             <td><?= $row['product_name'] ?></td>
                             <td><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['product_price'],2) ?></td>
-                            <td><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;"></td>
+                            <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
+                            <td><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;" min=1 ></td>
                             <td><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['total_price'],2) ?></td>
                             <td><a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" onclick="return confirm('Are you sure want to remove this item?'); "><i class="fas fa-trash-alt"></i></a></td>
 
@@ -128,6 +130,27 @@ session_start();
 
 <script>
     $(document).ready(function(){
+
+      //when item qty change update total price ajax request
+      $(".itemQty").on('change',function(){
+        var $el = $(this).closest('tr');
+
+        var pid = $el.find(".pid").val();
+        var pprice = $el.find(".pprice").val();
+        var qty = $el.find(".itemQty").val();
+        // console.log(qty);
+        $.ajax({
+          url: 'action.php',
+          method:'post',
+          cache:false,
+          data:{qty:qty,pid:pid,pprice:pprice},
+          success:function(response){
+            console.log(response);
+          }
+
+        })
+      })
+
         
         load_cart_item_number();
         //show cart number ajax request
