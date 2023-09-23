@@ -42,21 +42,52 @@
         <div class="col-lg-10">
             <div class="table-responsive mt-2">
                 <table class="table table-bordered table-striped text-center">
-                    <tr>
-                        <td colspan="7">
-                            <h4 class="text-center text-info m-0">Products in your cart!</h4>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total Price</th>
-                        <th>
-                            <a href="action.php?clear=all" class="badge-danger badge p-1" onclick="return confirm('Are you sure want to clear your cart?');"><i class="fas fa-trash"></i>&nbsp;&nbsp;Clear Cart</a>
-                        </th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <td colspan="7">
+                                <h4 class="text-center text-info m-0">Products in your cart!</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>
+                                <a href="action.php?clear=all" class="badge-danger badge p-1" onclick="return confirm('Are you sure want to clear your cart?');"><i class="fas fa-trash"></i>&nbsp;&nbsp;Clear Cart</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        
+                        require 'config.php';
+                        $stmt = $conn->prepare("SELECT * FROM cart");
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $grand_total = 0;
+                        while($row = $result->fetch_assoc()):
+                        ?>
+
+                        <tr>
+                            <td><?= $row['id'] ?></td>
+                            <td><img src="<?= $row['product_image'] ?>" alt="" width="50"></td>
+                            <td><?= $row['product_name'] ?></td>
+                            <td><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['product_price'],2) ?></td>
+                            <td><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;"></td>
+                            <td><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['total_price'],2) ?></td>
+                            <td><a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead"><i class="fas fa-trash-alt"></i></a></td>
+                        
+                            <?php endwhile;  ?>
+                        </tr>
+
+
+
+                       
+                    </tbody>
+                    
 </table>
             </div>
         </div>
