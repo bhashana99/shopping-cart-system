@@ -76,7 +76,7 @@ session_start();
                     <tbody>
                         <?php 
                         
-                        require 'config.php';
+                        include 'config.php';
                         $stmt = $conn->prepare("SELECT * FROM cart");
                         $stmt->execute();
                         $result = $stmt->get_result();
@@ -91,7 +91,9 @@ session_start();
                             <td><?= $row['product_name'] ?></td>
                             <td><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['product_price'],2) ?></td>
                             <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
-                            <td><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;" min=1 ></td>
+                            <td>
+    <input type="number" class="form-control itemQty" id="itemQty<?= $row['id'] ?>" value="<?= $row['qty'] ?>" style="width:75px;">
+</td>
                             <td><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['total_price'],2) ?></td>
                             <td><a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" onclick="return confirm('Are you sure want to remove this item?'); "><i class="fas fa-trash-alt"></i></a></td>
 
@@ -138,6 +140,7 @@ session_start();
         var pid = $el.find(".pid").val();
         var pprice = $el.find(".pprice").val();
         var qty = $el.find(".itemQty").val();
+        //location.reload(true);
         // console.log(qty);
         $.ajax({
           url: 'action.php',
@@ -146,10 +149,11 @@ session_start();
           data:{qty:qty,pid:pid,pprice:pprice},
           success:function(response){
             console.log(response);
+            // $(".itemQty").html(response);
           }
 
-        })
-      })
+        });
+      });
 
         
         load_cart_item_number();
