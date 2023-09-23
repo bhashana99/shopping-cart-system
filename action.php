@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'config.php';
 
 //Handle sent data to cart ajax request
@@ -41,6 +41,18 @@ if(isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item'){
     $rows = $stmt->num_rows;
 
     echo $rows;
+}
+
+if(isset($_GET['remove'])){
+    $id = $_GET['remove'];
+
+    $stmt = $conn->prepare("DELETE FROM cart WHERE id=?");
+    $stmt->bind_param("i",$id);
+    $stmt->execute();
+
+    $_SESSION['showAlert'] = 'block';
+    $_SESSION['message'] = 'Item remove from the cart';
+    header('location:cart.php');
 }
 
 
