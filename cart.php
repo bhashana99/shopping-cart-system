@@ -54,7 +54,7 @@
                         <th>Quantity</th>
                         <th>Total Price</th>
                         <th>
-                            <a href="action.php?clear=all" class="badge-danger badge p-"><i class="fas fa-trash"></i>&nbsp;&nbsp;Clear Cart</a>
+                            <a href="action.php?clear=all" class="badge-danger badge p-1" onclick="return confirm('Are you sure want to clear your cart?');"><i class="fas fa-trash"></i>&nbsp;&nbsp;Clear Cart</a>
                         </th>
                     </tr>
 </table>
