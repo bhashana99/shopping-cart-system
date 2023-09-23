@@ -55,5 +55,13 @@ if(isset($_GET['remove'])){
     header('location:cart.php');
 }
 
+if(isset($_GET['clear'])){
+    $stmt = $conn->prepare("DELETE FROM cart");
+    $stmt->execute();
+    $_SESSION['showAlert'] = 'block';
+    $_SESSION['message'] = 'All Item remove from the cart';
+    header('location:cart.php');
+}
+
 
 ?>
