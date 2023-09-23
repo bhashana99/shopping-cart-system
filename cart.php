@@ -49,6 +49,10 @@ session_start();
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-10">
+          <div style="display: <?php if(isset($_SESSION['showAlert'])){echo $_SESSION['showAlert'];}else{ echo 'none';} unset($_SESSION['showAlert']); ?>;" class="alert alert-success alert-dismissible mt-3">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong><?php if(isset($_SESSION['message'])){echo $_SESSION['message'];} unset($_SESSION['message']); ?></strong>
+          </div>
             <div class="table-responsive mt-2">
                 <table class="table table-bordered table-striped text-center">
                     <thead>
