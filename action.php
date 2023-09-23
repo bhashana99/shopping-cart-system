@@ -70,11 +70,12 @@ if (isset($_POST['qty'])) {
     $pprice = $_POST['pprice'];
 
     $tprice = $qty * $pprice;
-    print_r($_POST);
 
-    $stmt = $conn->prepare("UPDATE cart SET qty=?, total_price=? WHERE id=?");
-    $stmt->bind_param('isi',$qty,$tprice,$pid);
+
+    $stmt = $conn->prepare("UPDATE cart SET qty=$qty, total_price=$tprice WHERE id=$pid");
+   
     $stmt->execute();
+    
   }
 
 ?>
