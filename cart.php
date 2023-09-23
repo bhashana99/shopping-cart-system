@@ -137,12 +137,13 @@ session_start();
     $(document).ready(function(){
 
       //when item qty change update total price ajax request
-      $(".itemQty").on('change',function(){
+      $(".itemQty").on('change',function(e){
         var $el = $(this).closest('tr');
 
         var pid = $el.find(".pid").val();
         var pprice = $el.find(".pprice").val();
         var qty = $el.find(".itemQty").val();
+        e.preventDefault();
         location.reload(true);
          
         $.ajax({
