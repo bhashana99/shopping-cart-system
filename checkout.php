@@ -65,7 +65,7 @@ $allItems = implode(", ",$items);
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-6 px-4 pb-4">
+        <div class="col-lg-6 px-4 pb-4" id="order">
             <h4 class="text-center text-info p-2">Complete your order!</h4>
             <div class="jumbotron p-3 mb-2 text-center">
                 <h6 class="lead"><b>Product(s) : </b><?= $allItems; ?></h6>
@@ -117,6 +117,26 @@ $allItems = implode(", ",$items);
 
 <script>
     $(document).ready(function(){
+
+        //Ajax request for send data database to order table
+        $("#placeOrder").submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: 'action.php',
+                method: 'post',
+                data: $('form').serialize()+"&action=order",
+                success:function(response){
+                    $("#order").html(response);
+                }
+            })
+        }) 
+
+
+
+
+
+
+
         //sent data for cart Ajax request
                 load_cart_item_number();
         //show cart number ajax request
