@@ -75,7 +75,35 @@ if (isset($_POST['qty'])) {
     $stmt = $conn->prepare("UPDATE cart SET qty=$qty, total_price=$tprice WHERE id=$pid");
    
     $stmt->execute();
-    
+
   }
 
+
+  //Handle send order details Ajax request
+  if(isset($_POST['action']) && isset($_POST['action']) == 'order'){
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $products = $_POST['products'];
+    $grand_total = $_POST['grand_total'];
+    $address = $_POST['address'];
+    $pmode = $_POST['pmode'];
+
+    $data = '';
+
+    $stmt = $conn->prepare("INSERT INTO orders (name,email,phone,products,pmode,address,amount_paid) VALUES (?,?,?,?,?,?,?) ");
+    $stmt->bind_param("sssssss",$name,$email,$phone,$products,$pmode,$address,$grand_total);
+    $stmt->execute();
+    $data .= '<div class="text-center">
+                <h1 class="display-4 mt-2 text-danger">Thank You!</h1>
+                <h2 class="text-success">Your Order Placed Successfully!</h2>
+                <h4 class="bg-danger text-light rounded p-2">Item Purchased: '.$products.' </h4>
+                <h4>Your Name : '.$name.'</h4>
+                <h4>Your E-Mail : '.$email.'</h4>
+                <h4>Your Phone : '.$phone.'</h4>
+                <h4>Total Amount Paid : '.number_format($grand_total,2).'</h4>
+                <h4>Payment Mode : '.$pmode.'</h4>
+             </div>';
+             echo $data;
+  }
 ?>
