@@ -78,14 +78,23 @@
                             <td><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['product_price'],2) ?></td>
                             <td><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;"></td>
                             <td><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($row['total_price'],2) ?></td>
-                            <td><a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead"><i class="fas fa-trash-alt"></i></a></td>
-                        
-                            <?php endwhile;  ?>
+                            <td><a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" onclick="return confirm('Are you sure want to remove this item?'); "><i class="fas fa-trash-alt"></i></a></td>
+
+                            
                         </tr>
-
-
-
-                       
+                        <?php $grand_total += $row['total_price']  ?>
+                        
+                        <?php endwhile;  ?>
+                        <tr>
+                          <td colspan="3">
+                            <a href="index.php" class="btn btn-success"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Continue Shopping</a>
+                          </td>
+                          <td colspan="2"><b>Grand Total</b></td>
+                          <td><b><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($grand_total,2); ?></b></td>
+                          <td>
+                            <a href="checkout.php" class="btn btn-info"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
+                          </td>
+                        </tr>
                     </tbody>
                     
 </table>
