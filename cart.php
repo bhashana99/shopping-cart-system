@@ -92,7 +92,7 @@
                           <td colspan="2"><b>Grand Total</b></td>
                           <td><b><i class="fa-solid fa-dollar-sign"></i>&nbsp;&nbsp;<?= number_format($grand_total,2); ?></b></td>
                           <td>
-                            <a href="checkout.php" class="btn btn-info"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
+                            <a href="checkout.php" class="btn btn-info <?= ($grand_total > 1)?"":"disabled" ?>"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
                           </td>
                         </tr>
                     </tbody>
