@@ -63,7 +63,7 @@ if(isset($_GET['clear'])){
     header('location:cart.php');
 }
 
-//Handle when change qty value
+//Handle update qty and total value
 if (isset($_POST['qty'])) {
     $qty = $_POST['qty'];
     $pid = $_POST['pid'];
@@ -71,9 +71,9 @@ if (isset($_POST['qty'])) {
 
     $tprice = $qty * $pprice;
 
+    $stmt = $conn->prepare("UPDATE cart SET qty=?, total_price=? WHERE id=?");
 
-    $stmt = $conn->prepare("UPDATE cart SET qty=$qty, total_price=$tprice WHERE id=$pid");
-   
+    $stmt->bind_param("isi",$qty,$tprice,$pid);
     $stmt->execute();
 
   }
